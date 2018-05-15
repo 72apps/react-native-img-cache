@@ -5,7 +5,8 @@ const SHA1 = require("crypto-js/sha1");
 
 const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 const BASE_DIR = fs.CachesDirectoryPath + "/react-native-img-cache";
-const FILE_PREFIX = Platform.OS === "ios" ? "" : "file://";
+const FILE_PREFIX = Platform.OS === "ios" ? "file://" : "";
+export type CacheHandler = (path: string) => void;
 
 export interface CachedImageURISource extends ImageURISource {
     uri: string;
