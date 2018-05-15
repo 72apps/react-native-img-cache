@@ -4,6 +4,14 @@ export declare type CacheHandler = (path: string) => void;
 export interface CachedImageURISource extends ImageURISource {
     uri: string;
 }
+export declare type CacheEntry = {
+    source: CachedImageURISource;
+    handlers: CacheHandler[];
+    path: string | undefined;
+    immutable: boolean;
+    task?: any;
+};
+export declare type CacheHandler = (path: string, entry: CacheEntry) => void;
 export declare class ImageCache {
     private getPath(uri, immutable?);
     private static instance;
@@ -17,7 +25,7 @@ export declare class ImageCache {
     cancel(uri: string): void;
     private download(cache);
     private get(uri);
-    private notify(uri);
+    private notify(uri, entry);
 }
 export interface CachedImageProps extends ImageProperties {
     mutable?: boolean;
