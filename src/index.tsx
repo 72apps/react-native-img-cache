@@ -37,7 +37,13 @@ export class ImageCache {
 
     private static instance: ImageCache;
 
-    private constructor() {}
+    private constructor() { 
+        fs.exists(BASE_DIR).then((exists: boolean) => {
+            if (!exists) {
+                fs.mkdir(BASE_DIR);
+            }
+        });
+    }
 
     static get(): ImageCache {
         if (!ImageCache.instance) {
